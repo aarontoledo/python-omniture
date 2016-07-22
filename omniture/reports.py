@@ -121,7 +121,10 @@ class Report(object):
             if level == 0 and self.type == "trended":
                 element = "datetime"
             elif self.type == "trended":
-                element = str(self.elements[level-1].id)
+                if hasattr(self.elements[level-1], 'classification'):
+                    element = str(self.elements[level-1].id) + ' | ' + str(self.elements[level-1].classification).encode('utf-8')
+                else:
+                    element = str(self.elements[level-1].id)
             else:
                 element = str(self.elements[level].id)
             
